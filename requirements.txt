@@ -1,0 +1,16 @@
+fastapi[all]
+requests
+pytz
+sqlalchemy
+pymysql
+python-jose
+fastapi
+passlib
+bcrypt
+email-validator
+python-ulid[pydantic]
+redis[hiredis]
+boto3
+alembic
+pwdlib[argon2]
+sentry-sdk[fastapi]

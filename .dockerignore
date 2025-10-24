@@ -1,0 +1,90 @@
+# Git files
+.git
+.gitignore
+.gitattributes
+
+# Python cache files
+__pycache__
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+*.egg
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.mypy_cache/
+.ruff_cache/
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv/
+
+# IDE files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Docker files (avoid recursive copies)
+Dockerfile*
+docker-compose*.yml
+docker-compose*.yaml
+.dockerignore
+
+# Documentation
+*.md
+docs/
+README.md
+NGINX.md
+
+# Environment files (use secrets/configs instead)
+.env
+.env.*
+example.env
+
+# Volume directories (important to exclude)
+volume/
+./volume/
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Logs
+*.log
+logs/
+
+# Test files
+tests/
+test_*.py
+*_test.py
+
+# CI/CD
+.github/
+.gitlab-ci.yml
+.travis.yml
+
+# Scripts (unless needed in container)
+*.sh
+!minio-entrypoint.sh
+!init-minio.sh
+
+# Backup files
+*.bak
+*.backup
+mysql-backup/
+
+# Temporary files
+tmp/
+temp/
+*.tmp

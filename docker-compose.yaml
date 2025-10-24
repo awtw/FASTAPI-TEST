@@ -1,0 +1,98 @@
+services:
+
+  backend:
+    container_name: template-backend
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    env_file:
+      - example.env
+    volumes:
+      - ./src:/app/src
+      - ./alembic:/app/alembic
+      - ./alembic.ini:/app/alembic.ini
+      - ./run_alembic.sh:/app/run_alembic.sh
+    environment:
+      - PYTHONPATH=/app
+      - DEV=true
+    depends_on:
+      - redis
+      - mysql
+      - minio
+    networks:
+      - shared_network
+
+  redis:
+    container_name: template-redis
+    image: redis:7.0-alpine
+    restart: always
+    networks:
+      - shared_network
+    volumes:
+      - ./volume/redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  mysql:
+    container_name: template-mysql
+    image: mysql:8.3
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin1234
+      MYSQL_DATABASE: template_db
+    volumes:
+      - ./volume/mysql_data:/var/lib/mysql
+    command: --default-authentication-plugin=mysql_native_password
+    networks:
+      - shared_network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  adminer:
+    container_name: template-adminer
+    image: adminer
+    restart: always
+    ports:
+      - "8001:8080"
+    depends_on:
+      - mysql
+    networks:
+      - shared_network
+
+  minio:
+    image: quay.io/minio/minio
+    container_name: template-minio
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - ./volume/minio_data:/data
+      - ./init-minio.sh:/init-minio.sh:ro
+      - ./minio-entrypoint.sh:/minio-entrypoint.sh:ro
+    environment:
+      - MINIO_ROOT_USER=admin
+      - MINIO_ROOT_PASSWORD=admin1234
+    networks: 
+      - shared_network
+    entrypoint: /bin/sh
+    command: ["/minio-entrypoint.sh"]
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+networks:
+  shared_network:
+    driver: bridge
