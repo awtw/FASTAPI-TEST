@@ -5,6 +5,9 @@
 ## 使用方式
 - 直接在支持 Mermaid 的 Markdown 渲染器中查看
 - 或复制到 Mermaid Live Editor: https://mermaid.live/
+- 或查看下方已渲染的图片版本
+
+> 💡 提示：图片已自动渲染，保存在 `docs/images/` 目录中。如需重新渲染，运行 `python3 render_diagrams.py`
 
 ---
 
@@ -55,6 +58,8 @@ graph TB
     style Storage fill:#B6261E,stroke:#333,stroke-width:2px
 ```
 
+![系统整体架构图](images/01-1-系统整体架构图.png)
+
 ## 2. FastAPI 应用内部架构
 
 ```mermaid
@@ -99,6 +104,8 @@ graph LR
     style Database fill:#4CAF50,color:#fff
 ```
 
+![FastAPI 应用内部架构](images/02-2-FastAPI-应用内部架构.png)
+
 ## 3. 认证与授权流程
 
 ```mermaid
@@ -128,6 +135,8 @@ sequenceDiagram
     API->>API: 执行业务逻辑
     API-->>Client: 返回数据
 ```
+
+![认证与授权流程](images/03-3-认证与授权流程.png)
 
 ## 4. 权限层级结构
 
@@ -160,6 +169,8 @@ graph TD
     style SuperKey fill:#9C27B0,color:#fff
     style Error401 fill:#F44336,color:#fff
 ```
+
+![权限层级结构](images/04-4-权限层级结构.png)
 
 ## 5. 数据库模型关系图
 
@@ -200,6 +211,8 @@ erDiagram
     BLOBS ||--o{ USER_CHATROOMS : "has many"
 ```
 
+![数据库模型关系图](images/05-5-数据库模型关系图.png)
+
 ## 6. 文件上传流程
 
 ```mermaid
@@ -227,6 +240,8 @@ sequenceDiagram
     API-->>Client: 返回文件信息<br/>{id, url, ...}
 ```
 
+![文件上传流程](images/06-6-文件上传流程.png)
+
 ## 7. 数据库迁移流程
 
 ```mermaid
@@ -246,6 +261,8 @@ flowchart TD
     style Rollback fill:#F44336,color:#fff
     style Done fill:#2196F3,color:#fff
 ```
+
+![数据库迁移流程](images/07-7-数据库迁移流程.png)
 
 ## 8. Docker 容器网络架构
 
@@ -288,6 +305,8 @@ graph TB
     style Redis fill:#DC382D,stroke:#333,stroke-width:2px
     style MinIO fill:#B6261E,stroke:#333,stroke-width:2px
 ```
+
+![Docker 容器网络架构](images/08-8-Docker-容器网络架构.png)
 
 ## 9. 部署架构 (生产环境)
 
@@ -350,6 +369,8 @@ graph TB
     style S3 fill:#FF9800,color:#fff
 ```
 
+![部署架构 (生产环境)](images/09-9-部署架构-生产环境.png)
+
 ## 10. 开发工作流程图
 
 ```mermaid
@@ -386,3 +407,5 @@ graph LR
     style K fill:#9C27B0,color:#fff
     style O fill:#F44336,color:#fff
 ```
+
+![开发工作流程图](images/10-10-开发工作流程图.png)
